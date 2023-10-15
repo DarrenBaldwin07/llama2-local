@@ -53,5 +53,5 @@ def get_llama_response(prompt: str) -> None:
 
 
 
-prompt = 'What is 1 + 1?'
+prompt = 'Write me a random sentence about coffee'
 get_llama_response(prompt)

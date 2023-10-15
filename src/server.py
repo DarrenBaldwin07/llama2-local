@@ -1,3 +1,4 @@
+import json
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import torch
 import subprocess
@@ -6,8 +7,8 @@ from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-access_token = "<access_token>"
-model_name = "meta-llama/Llama-2-7b-chat-hf"
+access_token = "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"
+model_name = "meta-llama/Llama-2-13b-chat-hf"
 
 class PromptBody(BaseModel):
     prompt: str
@@ -30,7 +31,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_name, token=access_token)
 llama_pipeline = pipeline(
     "text-generation",
     model=model_name,
-    torch_dtype=torch.float32,
+    torch_dtype=torch.float16,
     device_map="auto",
 )
 
@@ -64,11 +65,12 @@ def inference(prompt: str) -> str:
         max_length=256,
     )
     print("Chatbot:", sequences[0]['generated_text'])
-    return {"response": sequences[0]['generated_text']}
+    return sequences[0]['generated_text']
 
 @app.post("/predict")
-def predict(body: PromptBody) -> str:
-    inference(body.prompt)
+def predict(body: PromptBody):
+    res = inference(body.prompt)
+    return {"response": json.dumps(res)}
 
 @app.get("/health")
 def health():
