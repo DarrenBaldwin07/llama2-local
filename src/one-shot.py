@@ -4,8 +4,8 @@ import subprocess
 
 print("<<<< RUNNING LLAMA2 >>>>")
 
-access_token = "<token>"
-model_name = "meta-llama/Llama-2-7b-chat-hf"
+access_token = "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"
+model_name = "meta-llama/Llama-2-13b-chat-hf"
 
 # Auth with huggingface before downloading llama2 (its a private model)
 def hf_login():
@@ -21,16 +21,13 @@ def hf_login():
 hf_login()
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, token=access_token)
-# model = AutoModelForCausalLM.from_pretrained(model_name)
-
 
 llama_pipeline = pipeline(
-    "text-generation",  # LLM task
+    "text-generation",
     model=model_name,
-    torch_dtype=torch.float32,
+    torch_dtype=torch.float16,
     device_map="auto",
 )
-
 
 
 def get_llama_response(prompt: str) -> None:
