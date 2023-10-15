@@ -4,7 +4,7 @@ import subprocess
 
 print("<<<< RUNNING LLAMA2 >>>>")
 
-access_token = "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"
+access_token = "<token>"
 model_name = "meta-llama/Llama-2-13b-chat-hf"
 
 # Auth with huggingface before downloading llama2 (its a private model)
