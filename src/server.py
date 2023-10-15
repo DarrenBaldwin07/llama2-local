@@ -7,7 +7,7 @@ from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-access_token = "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"
+access_token = "<token>"
 model_name = "meta-llama/Llama-2-13b-chat-hf"
 
 class PromptBody(BaseModel):
