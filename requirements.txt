@@ -6,3 +6,4 @@ pydantic
 torch
 accelerate
 uvicorn
+langchain

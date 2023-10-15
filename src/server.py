@@ -1,11 +1,11 @@
-import json
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TextStreamer
 import torch
 import subprocess
 from fastapi import FastAPI
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import json
 
 access_token = "<token>"
 model_name = "meta-llama/Llama-2-13b-chat-hf"
@@ -27,6 +27,7 @@ def hf_login():
 hf_login()
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, token=access_token)
+streamer = TextStreamer(tokenizer)
 
 llama_pipeline = pipeline(
     "text-generation",
@@ -62,6 +63,8 @@ def inference(prompt: str) -> str:
         top_k=10,
         num_return_sequences=1,
         eos_token_id=tokenizer.eos_token_id,
+        streamer=streamer,
+        batch_size=8,
         max_length=256,
     )
     print("Chatbot:", sequences[0]['generated_text'])
