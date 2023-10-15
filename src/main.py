@@ -4,7 +4,7 @@ import subprocess
 
 print("<<<< RUNNING LLAMA2 >>>>")
 
-access_token = "<your-token>"
+access_token = "<token>"
 model_name = "meta-llama/Llama-2-7b-chat-hf"
 
 # Auth with huggingface before downloading llama2 (its a private model)
@@ -56,5 +56,5 @@ def get_llama_response(prompt: str) -> None:
 
 
 
-prompt = 'I liked "Breaking Bad" and "Band of Brothers". Do you have any recommendations of other shows I might like?\n'
+prompt = 'What is 1 + 1?'
 get_llama_response(prompt)
