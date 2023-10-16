@@ -16,9 +16,17 @@ response = requests.get(repo_url)
 # Check if the request was successful
 if response.status_code == 200:
     # Find all file links on the page
-    file_links = [
-        "/postgres/postgres/master/meson.build"
-    ]
+    file_links = []
+
+    # Parse the HTML content of the page
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    file_links = [a['href'] for a in soup.find_all('a', class_='js-navigation-open')]
+
+    file_links = [link for link in file_links if '.' in link]
+
+    file_links = [f"{link.replace('/blob', '')}" for link in file_links]
+    print(file_links)
 
     for link in file_links:
 
