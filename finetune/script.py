@@ -1,4 +1,4 @@
-# Script to generatet `.txt` files for finetuning
+# Script to generate `.txt` files for finetuning
 # Pulls all files from the postgres source repo (https://github.com/postgres/postgres) and also the postgres docs (www.postgresql.org/)
 # Could also pull from internal data that we have at Tembo.io
 
@@ -26,7 +26,8 @@ if response.status_code == 200:
     file_links = [link for link in file_links if '.' in link]
 
     file_links = [f"{link.replace('/blob', '')}" for link in file_links]
-    print(file_links)
+
+
 
     for link in file_links:
 
