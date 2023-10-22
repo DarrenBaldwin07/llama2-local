@@ -9,6 +9,7 @@ __pycache__/
 
 .tox
 .cache
+finetune/data
 
 
 .idea*
