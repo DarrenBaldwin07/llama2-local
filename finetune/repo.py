@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 base_repo_url = "https://github.com/postgres/postgres"
 base_repo_content_url = "https://api.github.com/repos/postgres/postgres/contents/"
 
-token = "<your-token-here>"
+token = "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"
 username = 'DarrenBaldwin07'
 
 # Create a session with authentication

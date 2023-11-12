@@ -7,3 +7,4 @@ torch
 accelerate
 uvicorn
 langchain
+autotrain-advanced
